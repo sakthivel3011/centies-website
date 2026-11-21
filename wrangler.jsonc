@@ -1,0 +1,17 @@
+// Cloudflare deploy settings (used by "npx wrangler deploy").
+// The site is fully pre-rendered by "npm run build" into dist/, so Cloudflare only serves those files:
+// no Worker code and no Cloudflare build plugin. Without this file Wrangler tries to auto-configure the
+// project, adds its Vite plugin and breaks the pre-render step.
+// Security headers and redirects: public/_headers and public/_redirects (copied into dist/).
+{
+  "name": "centies-website",
+  "compatibility_date": "2026-11-19",
+  "assets": {
+    "directory": "./dist",
+    // /about serves about.html; /about/ redirects to /about (same as the old Vercel cleanUrls setting)
+    "html_handling": "drop-trailing-slash",
+    // Unknown addresses get dist/404.html with a real 404 status
+    "not_found_handling": "404-page"
+  },
+  "observability": { "enabled": true }
+}
