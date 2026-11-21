@@ -1,0 +1,14 @@
+{
+  "name": "CENTIES — Inter Engineering Sports",
+  "short_name": "CENTIES",
+  "description": "Coimbatore, Erode, Nilgiris and Tiruppur District Inter Engineering Sports Association",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf8f2",
+  "theme_color": "#1f2e8c",
+  "icons": [
+    { "src": "/images/logo/centies-logo-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/logo/centies-logo-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/images/logo/centies-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

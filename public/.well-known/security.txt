@@ -1,0 +1,4 @@
+Contact: mailto:centies2010@gmail.com
+Expires: 2027-11-19T00:00:00.000Z
+Preferred-Languages: en, ta
+Canonical: https://www.centies.in/.well-known/security.txt
