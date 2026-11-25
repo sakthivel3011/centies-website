@@ -145,6 +145,14 @@
  },
  {
   "category": "forms",
+  "title": "Rules & regulations \u2014 16th CENTIES Championship 2027",
+  "file": "/docs/forms/16th-CENTIES-Championship-2027-Rules-and-Regulations.pdf",
+  "bytes": 250236,
+  "type": "PDF",
+  "note": "General rules, system of play and squad sizes for every event"
+ },
+ {
+  "category": "forms",
   "title": "Player eligibility form",
   "file": "/docs/forms/eligibility-form.pdf",
   "bytes": 295308,
@@ -246,6 +254,14 @@
   "bytes": 1016083,
   "type": "PDF",
   "sport": "Volleyball"
+ },
+ {
+  "category": "knockout",
+  "title": "Knockout fixture \u2014 4 teams",
+  "file": "/docs/fixtures/knockout-04-teams.pdf",
+  "bytes": 201388,
+  "type": "PDF",
+  "teams": 4
  },
  {
   "category": "knockout",
@@ -726,45 +742,5 @@
   "bytes": 243599,
   "type": "PDF",
   "teams": 64
- },
- {
-  "category": "league",
-  "title": "League fixture \u2014 4 teams",
-  "file": "/docs/fixtures/league-4-teams.pdf",
-  "bytes": 227371,
-  "type": "PDF",
-  "teams": 4
- },
- {
-  "category": "league",
-  "title": "League fixture \u2014 5 teams",
-  "file": "/docs/fixtures/league-5-teams.pdf",
-  "bytes": 230941,
-  "type": "PDF",
-  "teams": 5
- },
- {
-  "category": "league",
-  "title": "League fixture \u2014 6 teams",
-  "file": "/docs/fixtures/league-6-teams.pdf",
-  "bytes": 232573,
-  "type": "PDF",
-  "teams": 6
- },
- {
-  "category": "league",
-  "title": "League fixture \u2014 7 teams",
-  "file": "/docs/fixtures/league-7-teams.pdf",
-  "bytes": 245493,
-  "type": "PDF",
-  "teams": 7
- },
- {
-  "category": "league",
-  "title": "League fixture \u2014 8 teams",
-  "file": "/docs/fixtures/league-8-teams.pdf",
-  "bytes": 238534,
-  "type": "PDF",
-  "teams": 8
  }
 ]

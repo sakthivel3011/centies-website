@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useLocation, useNavigation } from "react-router";
-import { btn, Icon } from "./ui";
+import { btn, Icon, IconFire } from "./ui";
 import { REGISTER_URL } from "../lib/config";
 
 type Item = { to: string; label: string; desc?: string };
@@ -179,7 +179,8 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         </ul>
         {/* Right under the links, not pinned to the bottom */}
         <div className="menu-item px-4 pb-8 pt-4" style={step()}>
-          <a href={REGISTER_URL} className={`${btn("primary")} w-full`}>
+          <a href={REGISTER_URL} className={`${btn("primary")} text-base`}>
+            <IconFire />
             Register your college
           </a>
         </div>
@@ -241,7 +242,9 @@ export function SiteHeader() {
           )}
         </nav>
 
-        <a href={REGISTER_URL} className={`${btn("primary", "sm")} ml-auto lg:ml-3`}>
+        {/* Over the dark artwork of the home hero (wide screens) the link is white, like on the dark page banners */}
+        <a href={REGISTER_URL} className={`${btn("primary")} ml-auto lg:ml-4 ${clear ? "lg:text-white lg:hover:text-gold-300" : ""}`}>
+          <IconFire className={clear ? "text-flame-500 lg:text-gold-400" : undefined} />
           Register
         </a>
         <button type="button" onClick={() => setMenu(true)} className="grid size-10 place-items-center rounded-lg text-ink hover:bg-surface lg:hidden" aria-label="Open menu" aria-expanded={menu}>

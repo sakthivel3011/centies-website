@@ -4,14 +4,12 @@ import { DOC_ALIASES, DOC_CATEGORIES, DOCS, fileSize, type DocCategory } from ".
 import { btn, Decor, DocRow, Icon, PageHero } from "../components/ui";
 import { NotFoundPage } from "./NotFoundPage";
 
-const KO_MIN = 5;
+const KO_MIN = 4;
 const KO_MAX = 64;
 
 function FixturePicker() {
   const [teams, setTeams] = useState(16);
-  const kind = teams <= 8 ? "both" : "knockout";
   const ko = DOCS.find((d) => d.category === "knockout" && d.teams === teams);
-  const league = DOCS.find((d) => d.category === "league" && d.teams === teams);
   return (
     <div className="rounded-xl border border-line p-6 sm:p-8" data-aos="fade-up">
       <p className="text-xl font-semibold tracking-tight text-ink">Find a fixture</p>
@@ -23,7 +21,7 @@ function FixturePicker() {
         <div className="flex items-center overflow-hidden rounded-lg border border-line text-ink">
           <button
             type="button"
-            onClick={() => setTeams((t) => Math.max(4, t - 1))}
+            onClick={() => setTeams((t) => Math.max(KO_MIN, t - 1))}
             className="grid size-10 place-items-center text-xl font-medium hover:bg-surface hover:text-royal-600"
             aria-label="Fewer teams"
           >
@@ -33,10 +31,10 @@ function FixturePicker() {
             id="teams"
             type="number"
             inputMode="numeric"
-            min={4}
+            min={KO_MIN}
             max={KO_MAX}
             value={teams}
-            onChange={(e) => setTeams(Math.min(KO_MAX, Math.max(4, Number(e.target.value) || 4)))}
+            onChange={(e) => setTeams(Math.min(KO_MAX, Math.max(KO_MIN, Number(e.target.value) || KO_MIN)))}
             className="h-10 w-14 border-x border-line text-center text-lg font-semibold tabular-nums outline-none"
           />
           <button
@@ -50,19 +48,14 @@ function FixturePicker() {
         </div>
         <span className="text-[15px] text-muted">teams</span>
       </div>
-      <div className="mt-5 flex flex-wrap gap-2.5">
+      <div className="mt-4 flex flex-wrap gap-x-7 gap-y-2">
         {ko && teams >= KO_MIN && (
           <a href={ko.file} download className={btn("primary")}>
             <Icon name="download" className="size-4" /> Knockout · {teams} teams <span className="font-normal opacity-80">({fileSize(ko.bytes)})</span>
           </a>
         )}
-        {league && (
-          <a href={league.file} download className={btn(kind === "both" && ko ? "secondary" : "primary")}>
-            <Icon name="download" className="size-4" /> League · {teams} teams <span className="font-normal opacity-80">({fileSize(league.bytes)})</span>
-          </a>
-        )}
       </div>
-      <p className="mt-3 text-[12.5px] text-muted">Knockout fixtures: 5 – 64 teams · League fixtures: 4 – 8 teams</p>
+      <p className="mt-3 text-[12.5px] text-muted">Knockout fixtures for 4 – 64 teams</p>
     </div>
   );
 }
@@ -81,7 +74,7 @@ export function DownloadsPage() {
 
   if (!valid) return <NotFoundPage />;
   const current = DOC_CATEGORIES.find((c) => c.key === category);
-  const fixtures = category === "knockout" || category === "league";
+  const fixtures = category === "knockout";
 
   return (
     <>

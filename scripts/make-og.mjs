@@ -47,7 +47,7 @@ p { margin: 22px 0 0; font-size: 20px; line-height: 1.45; color: rgb(20 22 41 / 
 <img class="art" src="${url(join(tmp, "athletes.png"))}" alt="">
 <div class="copy">
   <div class="brand"><img src="${url("public/images/logo/centies-logo-96.webp")}" alt=""><span><b>CENTIES</b><small>Inter Engineering Sports</small></span></div>
-  <h1>15<sup>th</sup> CENTIES<br><span>Championship</span></h1>
+  <h1>16<sup>th</sup> CENTIES<br><span>Championship</span></h1>
   <p>Inter engineering sports championship of Coimbatore, Erode, Nilgiris &amp; Tiruppur — since 2010.</p>
 </div>
 <div class="site">www.centies.in</div>

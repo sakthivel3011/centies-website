@@ -3,7 +3,9 @@ export const ORG = {
   name: "CENTIES Association",
   fullName: "Coimbatore, Erode, Nilgiris and Tiruppur District Inter Engineering Sports Association",
   regNo: "TN Reg. No. SRG/CBE/40/2023",
-  email: "centies2010@gmail.com",
+  email: "info@centies.in",
+  /** Both CENTIES addresses, shown together wherever the office contact is listed (the old Gmail address is no longer used). */
+  emails: ["info@centies.in", "support@centies.in"],
   phone: "+91 98424 11828",
   phoneHref: "tel:+919842411828",
   whatsappHref: "https://wa.me/919842411828",
@@ -22,34 +24,47 @@ export const WEBSITE_SUPPORT = {
   helpsWith: "A page or download not working, the registration form, or a payment problem.",
 };
 
-/** Championship correspondence (from the 15th CENTIES Championship 2026 registration form). */
+/** Championship correspondence (from the 16th CENTIES Championship 2026 registration form). */
 export const SECRETARY = {
   name: "Dr. R. Jeyaraman",
   role: "Secretary, CENTIES · Director of Physical Education",
   address: ["E6 Staff Quarters, Kongu Engineering College", "Perundurai, Erode"],
 };
 
+/** Office bearers and executive committee (from "CENTIES OFFICE BEARERS.docx", 2026). */
 export const OFFICE_BEARERS = [
-  { name: "Mr. N. Dinakaran", role: "President", institution: "CENTIES" },
+  { name: "Mr. J. Gerard Arokiaraj", role: "President", institution: "VCET" },
   { name: "Dr. V. Ravikumar", role: "Vice President", institution: "HCET" },
+  { name: "Mr. P. Marimuthu", role: "Vice President", institution: "ESEC" },
   { name: "Dr. R. Jeyaraman", role: "Secretary", institution: "KEC" },
-  { name: "Mr. J. Gnanasekar", role: "Joint Secretary", institution: "PCET" },
-  { name: "Dr. G. Ravindran", role: "Treasurer", institution: "CIT" },
-  { name: "Mr. B. Ravikumar", role: "Executive Member", institution: "KCT" },
-  { name: "Dr. C. G. S. Saravanan", role: "Executive Member", institution: "MCET" },
-  { name: "Mr. S. Gnanasekar", role: "Executive Member", institution: "BIT" },
-  { name: "Mr. N. P. Senthilkumar", role: "Executive Member", institution: "GCT" },
+  { name: "Ms. M. Nirmala Devi", role: "Joint Secretary", institution: "KCT" },
+  { name: "Dr. A. S. John Raja", role: "Joint Secretary", institution: "CIT" },
+  { name: "Mr. S. Kumaresan", role: "Treasurer", institution: "NIET" },
+  { name: "Dr. K. Amirthavalli", role: "Executive Member", institution: "KGISLIT" },
+  { name: "Dr. K. Vellimalai", role: "Executive Member", institution: "SNSCE" },
+  { name: "Dr. P. Velusamy", role: "Executive Member", institution: "SRIT" },
+  { name: "Mr. A. Jayaprakash", role: "Executive Member", institution: "KIT" },
+  { name: "Ms. R. Muthulakshmi", role: "Executive Member", institution: "KPRIET" },
+  { name: "Mr. S. Lakshmanan", role: "Executive Member", institution: "NEC" },
+  { name: "Mr. K. Kannan", role: "Executive Member", institution: "HIT" },
+  { name: "Mr. R. Stalin", role: "Executive Member", institution: "KPRIET" },
 ];
 
 export const INSTITUTIONS: Record<string, string> = {
-  HCET: "Hindusthan College of Engineering and Technology",
-  KEC: "Kongu Engineering College",
-  PCET: "Park College of Engineering and Technology",
-  CIT: "Coimbatore Institute of Technology",
-  KCT: "Kumaraguru College of Technology",
-  MCET: "Dr. Mahalingam College of Engineering and Technology",
-  BIT: "Bannari Amman Institute of Technology",
-  GCT: "Government College of Technology",
+  VCET: "Velalar College of Engineering and Technology, Erode",
+  HCET: "Hindusthan College of Engineering and Technology, Coimbatore",
+  ESEC: "Erode Sengunthar Engineering College, Erode",
+  KEC: "Kongu Engineering College, Erode",
+  KCT: "Kumaraguru College of Technology, Coimbatore",
+  CIT: "Coimbatore Institute of Technology, Coimbatore",
+  NIET: "Nehru Institute of Engineering and Technology, Coimbatore",
+  KGISLIT: "KGISL Institute of Technology, Coimbatore",
+  SNSCE: "SNS College of Engineering, Coimbatore",
+  SRIT: "Sri Ramakrishna Institute of Technology, Coimbatore",
+  KIT: "KIT – Kalaignarkarunanidhi Institute of Technology, Coimbatore",
+  KPRIET: "KPR Institute of Engineering and Technology, Coimbatore",
+  NEC: "Nandha Engineering College, Erode",
+  HIT: "Hindusthan Institute of Technology, Coimbatore",
 };
 
 export const VALUES = [

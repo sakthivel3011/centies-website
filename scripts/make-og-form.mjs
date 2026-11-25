@@ -46,11 +46,11 @@ p { margin: 22px 0 0; font-size: 20px; line-height: 1.45; color: rgb(20 22 41 / 
 <img class="art" src="${url(join(tmp, "athletes.png"))}" alt="">
 <div class="copy">
   <div class="brand"><img src="${url(`${FORM}/public/images/logo/centies-logo-192.png`)}" alt=""><span><b>CENTIES</b><small>Inter Engineering Sports</small></span></div>
-  <p class="eyebrow">15th CENTIES Championship 2026</p>
+  <p class="eyebrow">16th CENTIES Championship 2026</p>
   <h1>College<br><span>Registration</span></h1>
   <p>Register your college online. 14 events for men, 10 for women. Fee from ₹2,000, paid securely online.</p>
 </div>
-<div class="site">centies.in/register</div>
+<div class="site">register.centies.in</div>
 </body></html>`;
 writeFileSync(join(tmp, "og.html"), html);
 

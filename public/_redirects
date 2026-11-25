@@ -1,2 +1,3 @@
 # Redirects on Cloudflare (same as the old vercel.json). Copied into dist/ by the build.
 /downloads/score-sheet /downloads/score-sheets 301
+/downloads/league /downloads/knockout 301

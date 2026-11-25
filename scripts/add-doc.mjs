@@ -1,12 +1,12 @@
 // Adds a downloadable document (PDF / Word / Excel) and lists it on the Downloads page.
 //
 //   npm run add-doc -- <file> --category results --title "14th CENTIES Championship 2025 — results" --year 2025
-//   categories: results, organizers, sponsors, forms, score-sheets, knockout, league
+//   categories: results, organizers, sponsors, forms, score-sheets, knockout
 import { copyFileSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, extname, join, resolve } from "node:path";
 import { parseArgs } from "node:util";
 
-const CATEGORIES = ["results", "organizers", "sponsors", "forms", "score-sheets", "knockout", "league"];
+const CATEGORIES = ["results", "organizers", "sponsors", "forms", "score-sheets", "knockout"];
 const { values, positionals } = parseArgs({
   allowPositionals: true,
   options: { category: { type: "string" }, title: { type: "string" }, year: { type: "string" }, note: { type: "string" }, name: { type: "string" } },
@@ -21,7 +21,7 @@ if (![".pdf", ".docx", ".doc", ".xlsx", ".xls"].includes(ext)) throw new Error("
 
 const root = resolve(import.meta.dirname, "..");
 const slug = (values.name ?? basename(file, ext)).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const folder = values.category === "knockout" || values.category === "league" ? "fixtures" : values.category;
+const folder = values.category === "knockout" ? "fixtures" : values.category;
 const rel = `/docs/${folder}/${slug}${ext}`;
 mkdirSync(join(root, "public/docs", folder), { recursive: true });
 copyFileSync(file, join(root, "public", rel));

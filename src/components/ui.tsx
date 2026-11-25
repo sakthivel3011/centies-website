@@ -4,10 +4,11 @@ import { Link } from "react-router";
 /** Scroll-in animation names (AOS style); see src/lib/aos.ts and index.css. */
 export type Aos = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "zoom-in" | "fade";
 
-type IconName = "arrow" | "download" | "file" | "phone" | "mail" | "pin" | "clock" | "whatsapp" | "trophy" | "users" | "calendar" | "search" | "close" | "chevron" | "menu" | "external" | "photo";
+type IconName = "arrow" | "fire" | "download" | "file" | "phone" | "mail" | "pin" | "clock" | "whatsapp" | "trophy" | "users" | "calendar" | "search" | "close" | "chevron" | "menu" | "external" | "photo";
 
 const PATHS: Record<IconName, ReactNode> = {
   arrow: <path d="M5 12h14m-6-6 6 6-6 6" />,
+  fire: <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />,
   download: <path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" />,
   file: (
     <>
@@ -166,26 +167,42 @@ export function Reveal({ children, className, as: Tag = "div", aos = "fade-up", 
   );
 }
 
-/* Buttons: one compact style across the site.
-   primary = blue (most actions) · accent = orange (registration) · secondary = white with a border · ghost = on dark bands */
-type BtnVariant = "primary" | "accent" | "secondary" | "ghost";
+/* Buttons: the same style as the registration site — text only (no background, no border). A line under the label
+   covers the left half and grows to the full width on hover while the colour changes. Icons stay still:
+   <IconFire /> before Register, <IconNext /> after go-to links, the download icon before downloads.
+   primary = blue → orange · secondary = grey → blue · ghost = white → gold (on the dark page banners) */
+type BtnVariant = "primary" | "secondary" | "ghost";
 type BtnSize = "sm" | "md";
-const BTN_SIZE: Record<BtnSize, string> = { sm: "h-8 px-3 text-[13px]", md: "h-9 px-4 text-sm" };
+const BTN_SIZE: Record<BtnSize, string> = { sm: "min-h-8 text-[13px] after:bottom-0.5", md: "min-h-10 text-sm after:bottom-1" };
+const BTN_BASE =
+  "relative inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-sm font-bold transition-colors duration-300 " +
+  "after:absolute after:left-0 after:h-0.5 after:w-1/2 after:rounded-full after:bg-current after:transition-[width] after:duration-300 after:ease-out hover:after:w-full focus-visible:after:w-full " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4";
 const BTN_VARIANT: Record<BtnVariant, string> = {
-  primary: "bg-royal-700 text-white shadow-[var(--shadow-xs)] hover:bg-royal-800",
-  accent: "bg-flame-500 text-white shadow-[var(--shadow-xs)] hover:bg-flame-600",
-  secondary: "bg-white text-ink shadow-[var(--shadow-xs)] ring-1 ring-inset ring-line hover:bg-surface hover:ring-slate-300",
-  ghost: "bg-white/10 text-white ring-1 ring-inset ring-white/25 hover:bg-white/15",
+  primary: "text-royal-700 hover:text-flame-500 focus-visible:ring-royal-200",
+  secondary: "text-ink/70 hover:text-royal-700 focus-visible:ring-royal-100",
+  ghost: "text-white hover:text-gold-300 focus-visible:ring-white/40 focus-visible:ring-offset-0",
 };
 
 /** Class names for a button-styled link or button. */
-export const btn = (variant: BtnVariant = "primary", size: BtnSize = "md") =>
-  `inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-lg font-semibold transition-colors ${BTN_SIZE[size]} ${BTN_VARIANT[variant]}`;
+export const btn = (variant: BtnVariant = "primary", size: BtnSize = "md") => `${BTN_BASE} ${BTN_SIZE[size]} ${BTN_VARIANT[variant]}`;
 
+/** Right arrow after the label of a button that opens another page. */
+export function IconNext({ className = "size-4" }: { className?: string }) {
+  return <Icon name="arrow" className={`shrink-0 ${className}`} />;
+}
+
+/** Fire icon before the label of every Register button (flame orange; pass a colour class on dark banners). */
+export function IconFire({ className = "text-flame-500" }: { className?: string }) {
+  return <Icon name="fire" className={`size-[18px] shrink-0 ${className}`} />;
+}
+
+/** A button-styled link to another page of this site; the right arrow is added after the label. */
 export function ButtonLink({ to, children, variant = "primary", size = "md", className = "" }: { to: string; children: ReactNode; variant?: BtnVariant; size?: BtnSize; className?: string }) {
   return (
     <Link to={to} className={`${btn(variant, size)} ${className}`}>
       {children}
+      <IconNext className={size === "sm" ? "size-3.5" : "size-4"} />
     </Link>
   );
 }
@@ -202,11 +219,11 @@ export function DocRow({ title, file, size, type, note }: { title: string; file:
           {note ? ` · ${note}` : ""}
         </p>
       </div>
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="flex shrink-0 items-center gap-5">
         {type === "PDF" && (
           <span className="hidden sm:inline-flex">
             <a href={file} target="_blank" rel="noopener" className={btn("secondary", "sm")}>
-              View
+              View <IconNext className="size-3.5" />
             </a>
           </span>
         )}

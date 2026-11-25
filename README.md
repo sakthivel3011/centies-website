@@ -25,7 +25,7 @@ npm run preview    # serve dist/ with the production security headers on :4174
 | `/championship/results` | 2020 champions table (men/women) + result PDFs 2010–2020 |
 | `/championship/organizers` | Host colleges and participation for every year 2010–2020 + PDFs |
 | `/championship/sponsors`, `/championship/grants` | Trophy sponsors; trophies, certificates, Fair Play Award |
-| `/championship/rules` | 11 rules + system of play for every sport |
+| `/championship/rules` | 14 general rules + system of play for every sport (men and women) |
 | `/gallery`, `/gallery/:album` | 4 albums, 65 photos, full-screen viewer (keyboard + swipe) |
 | `/downloads`, `/downloads/:category` | 96 files with search, categories and a “how many teams?” fixture finder |
 | `/contact` | Phone, WhatsApp, email, office address & hours, Secretary’s address |

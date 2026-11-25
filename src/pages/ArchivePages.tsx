@@ -175,7 +175,7 @@ export function GrantsPage() {
           <div className="mt-12 rounded-xl border border-line p-6">
             <p className="font-semibold text-ink">Grants and prize details for 2026</p>
             <p className="mt-1 text-[14.5px] text-muted">
-              Financial grants and any prize money for the 15th CENTIES Championship will be announced by the Executive Committee. Registered colleges will be informed by email.
+              Financial grants and any prize money for the 16th CENTIES Championship will be announced by the Executive Committee. Registered colleges will be informed by email.
             </p>
           </div>
         </div>

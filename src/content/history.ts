@@ -69,5 +69,5 @@ export const MILESTONES = [
   { year: "2015", title: "Athletics arrives", text: "Athletics and women’s Throwball join a programme that now spans more than ten sports." },
   { year: "2018", title: "Renamed CENTIES", text: "On 3 May 2018 the general body renames the Engineering Colleges Physical Educationist Club (ECPEC) to CENTIES." },
   { year: "2023", title: "Registered association", text: "CENTIES Association is registered in Tamil Nadu — " + "SRG/CBE/40/2023." },
-  { year: "2026", title: "15th Championship", text: "14 events for men and 10 for women, with online registration for the first time." },
+  { year: "2026", title: "16th Championship", text: "14 events for men and 10 for women, with online registration for the first time." },
 ];

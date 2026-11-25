@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { buildVersion } from "./scripts/version-plugin";
 
 const SECURITY_HEADERS = {
   "X-Content-Type-Options": "nosniff",
@@ -15,7 +16,7 @@ const CSP =
   "form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), buildVersion()],
   server: { port: 5174, strictPort: true, headers: SECURITY_HEADERS },
   preview: { port: 4174, headers: { ...SECURITY_HEADERS, "Content-Security-Policy": CSP } },
   // No data: URI inlining, so the CSP can stay strict (font-src 'self').

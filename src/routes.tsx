@@ -3,9 +3,11 @@ import { Outlet, ScrollRestoration, useLocation, useMatches, useNavigation, type
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
 import { LoadingScreen } from "./components/LoadingScreen";
+import { UpdateToast } from "./components/UpdateToast";
 import { ALBUMS, DOC_ALIASES, DOC_CATEGORIES } from "./content/data";
 import { initAos } from "./lib/aos";
 import { initSmoothScroll } from "./lib/smooth";
+import { reloadTo, setGoingTo, updateReady } from "./lib/update";
 
 /** Each page is its own JavaScript chunk, loaded on demand (the first page is loaded before hydration in main.tsx). */
 const page =
@@ -28,6 +30,12 @@ function Layout() {
   const navigation = useNavigation();
   const { pathname } = useLocation();
   const loading = navigation.state === "loading" && navigation.location.pathname !== pathname;
+  // A newer version is out: open the next page fresh from the server (see src/lib/update.ts).
+  const target = navigation.location ? navigation.location.pathname + navigation.location.search + navigation.location.hash : null;
+  useEffect(() => {
+    setGoingTo(target);
+    if (target && updateReady()) reloadTo(target);
+  }, [target]);
   // Once, after the page is interactive: AOS-style scroll animations and smooth wheel scrolling
   useEffect(() => {
     initAos();
@@ -44,6 +52,7 @@ function Layout() {
         <Outlet />
       </main>
       {loading && <LoadingScreen />}
+      <UpdateToast />
       <SiteFooter />
       <ScrollRestoration />
     </div>
@@ -89,14 +98,14 @@ export const routes: RouteObject[] = [
   {
     element: <Layout />,
     children: [
-      { path: "/", lazy: page(home, "HomePage"), handle: { meta: { title: "Home", description: "CENTIES — the Coimbatore, Erode, Nilgiris and Tiruppur District Inter Engineering Sports Championship. 15th edition in 2026 with 24 events." } } },
+      { path: "/", lazy: page(home, "HomePage"), handle: { meta: { title: "Home", description: "CENTIES — the Coimbatore, Erode, Nilgiris and Tiruppur District Inter Engineering Sports Championship. 16th edition in 2026 with 24 events." } } },
       { path: "/about", lazy: page(about, "AboutPage"), handle: { meta: { title: "About CENTIES", description: "How CENTIES began in 2009, how the championship has grown since 2010, and what it stands for." } } },
       { path: "/about/office-bearers", lazy: page(about, "OfficeBearersPage"), handle: { meta: { title: "Office bearers", description: "The executive committee leading the CENTIES Association." } } },
-      { path: "/championship", lazy: page(() => import("./pages/ChampionshipPage"), "ChampionshipPage"), handle: { meta: { title: "15th CENTIES Championship 2026", description: "Events, registration fee and how to register your college for the 15th CENTIES Championship 2026." } } },
+      { path: "/championship", lazy: page(() => import("./pages/ChampionshipPage"), "ChampionshipPage"), handle: { meta: { title: "16th CENTIES Championship 2026", description: "Events, registration fee and how to register your college for the 16th CENTIES Championship 2026." } } },
       { path: "/championship/results", lazy: page(() => import("./pages/ResultsPage"), "ResultsPage"), handle: { meta: { title: "Results", description: "CENTIES champions and official results from every edition since 2010." } } },
       { path: "/championship/organizers", lazy: page(archive, "OrganizersPage"), handle: { meta: { title: "Organisers", description: "Engineering colleges that have hosted CENTIES events since 2010." } } },
       { path: "/championship/sponsors", lazy: page(archive, "SponsorsPage"), handle: { meta: { title: "Sponsors", description: "Trophy sponsors who support the CENTIES Championship." } } },
-      { path: "/championship/rules", lazy: page(() => import("./pages/RulesPage"), "RulesPage"), handle: { meta: { title: "Rules & regulations", description: "Eligibility, protests and the general rules for every CENTIES event." } } },
+      { path: "/championship/rules", lazy: page(() => import("./pages/RulesPage"), "RulesPage"), handle: { meta: { title: "Rules & regulations", description: "Eligibility, protests, the general rules and the system of play and squad size for every CENTIES event." } } },
       { path: "/championship/grants", lazy: page(archive, "GrantsPage"), handle: { meta: { title: "Awards & grants", description: "Trophies, certificates and the Fair Play Award at the CENTIES Championship." } } },
       { path: "/gallery", lazy: page(gallery, "GalleryPage"), handle: { meta: { title: "Gallery", description: "Photos from CENTIES championships — matches, ceremonies and champions." } } },
       { path: "/gallery/:album", lazy: page(gallery, "AlbumPage"), handle: { meta: albumMeta } },

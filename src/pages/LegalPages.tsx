@@ -9,7 +9,11 @@ const UPDATED = "20 November 2026";
 const host = (url: string) => new URL(url).host;
 const Office = () => (
   <p>
-    {ORG.name}, {ORG.address.join(", ")} · <a href={`mailto:${ORG.email}`}>{ORG.email}</a> · <a href={ORG.phoneHref}>{ORG.phone}</a>
+    {ORG.name}, {ORG.address.join(", ")} · {ORG.emails.map((e) => (
+      <span key={e}>
+        <a href={`mailto:${e}`}>{e}</a> ·{" "}
+      </span>
+    ))} <a href={ORG.phoneHref}>{ORG.phone}</a>
   </p>
 );
 
@@ -339,8 +343,12 @@ export function SupportPage() {
                 <p className="mt-1 text-[14px] leading-6 text-muted">Rules, fixtures, venues, results, adding or removing teams, and refunds.</p>
                 <p className="mt-3 text-[14px] leading-6">
                   <a href={ORG.phoneHref}>{ORG.phone}</a>
-                  <br />
-                  <a href={`mailto:${ORG.email}`}>{ORG.email}</a>
+                  {ORG.emails.map((e) => (
+                    <span key={e}>
+                      <br />
+                      <a href={`mailto:${e}`}>{e}</a>
+                    </span>
+                  ))}
                   <br />
                   <span className="text-muted">{ORG.hours}</span>
                 </p>
@@ -377,7 +385,7 @@ export function SupportPage() {
                 <b>A document will not open.</b> Use the Download button and open the file with a PDF reader. If it still fails, tell website support the name of the document.
               </li>
               <li>
-                <b>Money was taken but the registration shows unpaid.</b> Check the <a href={`${FORM_URL}/register/status`}>payment status page</a> on the device you used. If it still shows unpaid,
+                <b>Money was taken but the registration shows unpaid.</b> Check the <a href={`${FORM_URL}/onboarding/status`}>payment status page</a> on the device you used. If it still shows unpaid,
                 call website support with your registration ID.
               </li>
               <li>

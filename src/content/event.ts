@@ -4,9 +4,9 @@
  * e.g. "2026-12-31T23:59:00+05:30".
  */
 export const EVENT = {
-  edition: 15,
+  edition: 16,
   year: 2026,
-  name: "15th CENTIES Championship 2026",
+  name: "16th CENTIES Championship 2026",
   registrationDeadline: null as string | null,
   startDate: null as string | null,
   endDate: null as string | null,

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RESULTS_2020 } from "../content/results2020";
 import { EDITIONS } from "../content/history";
 import { DOCS, fileSize } from "../content/data";
-import { btn, Decor, Icon, PageHero, Reveal, SectionHead } from "../components/ui";
+import { btn, Decor, Icon, IconNext, PageHero, Reveal, SectionHead } from "../components/ui";
 
 const ORD = (n: number) => (n === 1 ? "1st" : n === 2 ? "2nd" : n === 3 ? "3rd" : `${n}th`);
 const short = (college: string) => college.split(",")[0];
@@ -107,14 +107,15 @@ export function ResultsPage() {
                     {ed?.colleges && <span className="pt-1 text-[13px] text-muted">{ed.colleges} colleges</span>}
                   </div>
                   {ed && <p className="mt-3 line-clamp-2 text-[13px] text-muted">Hosted by {ed.hosts.join(", ")}</p>}
-                  <div className="mt-auto flex gap-2 pt-5">
-                    <a href={d.file} target="_blank" rel="noopener" className={`${btn("primary", "sm")} flex-1`}>
+                  <div className="mt-auto flex items-center justify-between gap-2 pt-5">
+                    <a href={d.file} target="_blank" rel="noopener" className={btn("primary", "sm")}>
                       View results
+                      <IconNext className="size-3.5" />
                     </a>
                     <a
                       href={d.file}
                       download
-                      className="grid size-8 shrink-0 place-items-center rounded-lg bg-white text-ink shadow-[var(--shadow-xs)] ring-1 ring-inset ring-line transition-colors hover:bg-surface"
+                      className="grid size-8 shrink-0 place-items-center rounded-sm text-ink/60 transition-colors duration-300 hover:text-royal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal-200"
                       aria-label={`Download ${d.year} results (${fileSize(d.bytes)})`}
                     >
                       <Icon name="download" className="size-4" />

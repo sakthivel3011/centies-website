@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { EVENTS, sportImage } from "../content/sports";
 import { RESULTS_2020, titleLeaders } from "../content/results2020";
 import { ALBUMS, ALBUM_COVER } from "../content/data";
-import { ButtonLink, Decor, Icon, Reveal, SectionHead } from "../components/ui";
+import { btn, ButtonLink, Decor, Icon, IconFire, IconNext, Reveal, SectionHead } from "../components/ui";
 import { DEMO_URL, REGISTER_URL } from "../lib/config";
 import { EVENT } from "../content/event";
 import { Countdown } from "../components/Countdown";
@@ -34,7 +34,7 @@ export function HomePage() {
         <div className="mx-auto flex max-w-6xl items-center px-4 pb-16 pt-16 sm:pb-24 sm:pt-24 lg:min-h-[600px]">
           <div className="animate-rise min-w-0 max-w-2xl">
             <h1 className="font-display text-[clamp(40px,14.5vw,56px)] font-extrabold uppercase leading-[0.88] tracking-wide sm:text-[84px]">
-              15<sup className="relative top-[0.12em] ml-0.5 align-top text-[0.42em] normal-case leading-none">th</sup> CENTIES
+              {EVENT.edition}<sup className="relative top-[0.12em] ml-0.5 align-top text-[0.42em] normal-case leading-none">th</sup> CENTIES
               <br />
               <span className="text-flame-500">Championship</span>
             </h1>
@@ -42,12 +42,14 @@ export function HomePage() {
               Inter engineering sports championship of Coimbatore, Erode,
               <br className="hidden sm:inline" /> Nilgiris &amp; Tiruppur — since 2010.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a href={REGISTER_URL} className="inline-flex h-11 items-center rounded-lg bg-flame-500 px-5 text-sm font-bold text-white shadow-md transition hover:bg-flame-600">
+            <div className="mt-7 flex flex-wrap gap-x-8 gap-y-2">
+              <a href={REGISTER_URL} className={`${btn("primary")} text-base`}>
+                <IconFire />
                 Register your college
               </a>
-              <Link to="/championship" className="inline-flex h-11 items-center rounded-lg bg-royal-700 px-5 text-sm font-bold text-white transition hover:bg-royal-800">
+              <Link to="/championship" className={`${btn("secondary")} text-base`}>
                 2026 events &amp; fee
+                <IconNext />
               </Link>
             </div>
             <p className="mt-4 text-sm text-muted">
@@ -90,7 +92,7 @@ export function HomePage() {
             <blockquote className="mt-6 border-l-2 border-royal-600 pl-5 text-[15.5px] leading-7 text-ink/85">
               “The sports field is where a person learns life skills — respecting, reciprocating and appreciating fellow human beings. That is why CENTIES matters.”
             </blockquote>
-            <div className="mt-8 flex flex-wrap gap-2.5">
+            <div className="mt-8 flex flex-wrap gap-x-7 gap-y-2">
               <ButtonLink to="/about" size="sm">
                 Read our story
               </ButtonLink>
@@ -239,7 +241,7 @@ export function HomePage() {
       <section className="mx-auto max-w-6xl px-4">
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { to: "/downloads/forms", t: "Forms & fixtures", d: "Eligibility form, knockout and league fixtures, score sheets.", icon: "download" as const },
+            { to: "/downloads/forms", t: "Forms & fixtures", d: "Eligibility form, knockout fixtures, score sheets.", icon: "download" as const },
             { to: "/championship/rules", t: "Rules & regulations", d: "Eligibility, protests and the general rules for every college.", icon: "file" as const },
             { to: "/contact", t: "Contact the committee", d: "Call or email the CENTIES office.", icon: "phone" as const },
           ].map((q) => (

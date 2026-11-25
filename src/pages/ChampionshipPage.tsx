@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { EVENTS, GENDER_LABEL, sportThumb, type Gender } from "../content/sports";
 import { FEE_SLABS, inr } from "../content/fees";
 import { DOCS } from "../content/data";
-import { btn, Decor, Icon, PageHero, Reveal, SectionHead } from "../components/ui";
+import { btn, Decor, Icon, IconFire, IconNext, PageHero, Reveal, SectionHead } from "../components/ui";
 import { DEMO_URL, REGISTER_URL } from "../lib/config";
 import { EVENT } from "../content/event";
 import { Countdown } from "../components/Countdown";
@@ -22,18 +22,20 @@ export function ChampionshipPage() {
         eyebrow="Championship 2026"
         title={
           <>
-            15<sup className="relative top-[0.12em] ml-0.5 align-top text-[0.42em] normal-case leading-none">th</sup> CENTIES Championship
+            {EVENT.edition}<sup className="relative top-[0.12em] ml-0.5 align-top text-[0.42em] normal-case leading-none">th</sup> CENTIES Championship
           </>
         }
         intro={`${EVENTS.M.length} events for men and ${EVENTS.W.length} for women.`}
         crumbs={[{ to: "/championship", label: "Championship 2026" }]}
       >
-        <div className="mt-7 flex flex-wrap gap-3">
-          <a href={REGISTER_URL} className={btn("accent")}>
+        <div className="mt-7 flex flex-wrap gap-x-8 gap-y-2">
+          <a href={REGISTER_URL} className={`${btn("ghost")} text-base`}>
+            <IconFire className="text-gold-400" />
             Register your college
           </a>
-          <a href={DEMO_URL} className={btn("ghost")}>
+          <a href={DEMO_URL} className={`${btn("ghost")} text-base`}>
             See the demo form
+            <IconNext />
           </a>
         </div>
         {EVENT.registrationDeadline && (
@@ -103,10 +105,10 @@ export function ChampionshipPage() {
               <p className="font-semibold text-ink">Before the matches</p>
               <ul className="mt-2 list-disc space-y-1.5 pl-4 text-[14px] text-muted">
                 <li>Players list signed by the Principal and the Physical Director</li>
-                <li>College ID card and recent hall ticket or mark sheet</li>
+                <li>College ID card for every player</li>
                 <li>A DPE or teaching faculty member must accompany the team</li>
               </ul>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
                 {eligibility && (
                   <a href={eligibility.file} download className={btn("primary", "sm")}>
                     <Icon name="download" className="size-4" /> Eligibility form
@@ -114,6 +116,7 @@ export function ChampionshipPage() {
                 )}
                 <Link to="/championship/rules" className={btn("secondary", "sm")}>
                   Full rules
+                  <IconNext className="size-3.5" />
                 </Link>
               </div>
             </div>
@@ -130,8 +133,9 @@ export function ChampionshipPage() {
                 ? `The championship runs from ${new Date(EVENT.startDate).toLocaleDateString("en-IN", { day: "numeric", month: "long", timeZone: "Asia/Kolkata" })}${EVENT.endDate ? ` to ${new Date(EVENT.endDate).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kolkata" })}` : ""}. Fixtures and host colleges for each event are shared with registered colleges.`
                 : "Fixtures, host colleges and dates for each event will be announced by the organising committee and shared with registered colleges."}
             </p>
-            <Link to="/contact" className={`${btn("primary")} mt-5`}>
+            <Link to="/contact" className={`${btn("primary")} mt-4`}>
               Ask the committee
+              <IconNext />
             </Link>
           </div>
           <img src="/images/decor/pattern.webp" alt="" width={736} height={368} loading="lazy" decoding="async" className="hidden h-full w-full object-cover md:block" />

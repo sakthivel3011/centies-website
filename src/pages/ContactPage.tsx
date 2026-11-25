@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { OFFICE_BEARERS, ORG, SECRETARY, WEBSITE_SUPPORT } from "../content/site";
-import { btn, ButtonLink, Icon, PageHero, Reveal, SectionHead } from "../components/ui";
+import { btn, ButtonLink, Icon, IconFire, IconNext, PageHero, Reveal, SectionHead } from "../components/ui";
 import { REGISTER_URL } from "../lib/config";
 
 export function ContactPage() {
@@ -54,10 +54,14 @@ export function ContactPage() {
                 <a href={ORG.phoneHref} className="font-medium text-ink hover:text-royal-700">
                   {ORG.phone}
                 </a>
-                <br />
-                <a href={`mailto:${ORG.email}`} className="break-all font-medium text-ink hover:text-royal-700">
-                  {ORG.email}
-                </a>
+                {ORG.emails.map((e) => (
+                  <span key={e}>
+                    <br />
+                    <a href={`mailto:${e}`} className="break-all font-medium text-ink hover:text-royal-700">
+                      {e}
+                    </a>
+                  </span>
+                ))}
               </p>
             </Reveal>
             {/* Website & registration support (same details as the Support page) */}
@@ -111,15 +115,17 @@ export function ContactPage() {
           <div className="rounded-xl border border-line p-6" data-aos="fade-up">
             <p className="font-semibold text-ink">Registering a college?</p>
             <p className="mt-1 text-[14.5px] text-muted">Registration and payment for 2026 are online, and the confirmation is emailed instantly.</p>
-            <a href={REGISTER_URL} className={`${btn("accent")} mt-5`}>
+            <a href={REGISTER_URL} className={`${btn("primary")} mt-4`}>
+              <IconFire />
               Go to registration
             </a>
           </div>
           <div className="rounded-xl border border-line p-6" data-aos="fade-up">
             <p className="font-semibold text-ink">Looking for forms or fixtures?</p>
-            <p className="mt-1 text-[14.5px] text-muted">Eligibility forms, knockout and league fixtures, score sheets and past results.</p>
-            <Link to="/downloads" className={`${btn("primary")} mt-5`}>
+            <p className="mt-1 text-[14.5px] text-muted">Eligibility forms, knockout fixtures, score sheets and past results.</p>
+            <Link to="/downloads" className={`${btn("primary")} mt-4`}>
               Open downloads
+              <IconNext />
             </Link>
           </div>
         </div>
