@@ -6,7 +6,7 @@ const COLUMNS = [
   {
     title: "Championship",
     links: [
-      ["/championship", "2026 Championship"],
+      ["/championship", "2027 Championship"],
       ["/championship/rules", "Rules & regulations"],
       ["/championship/organizers", "Organisers"],
       ["/championship/sponsors", "Sponsors"],
@@ -69,6 +69,12 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-x-6 gap-y-1.5 px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 text-center text-[13px] text-white/60 sm:flex-row sm:flex-wrap sm:justify-between sm:text-left">
           <p suppressHydrationWarning>© 2009 – {new Date().getFullYear()} CENTIES Association. All rights reserved.</p>
           <p>{ORG.regNo}</p>
+          {/* Site credit: a plain link to the developer's website (no hover effect), the same as the registration site */}
+          <p>
+            <a href="https://mendsolution.in/" target="_blank" rel="noopener" className="inline-block py-1 sm:py-0">
+              A Digital Experience by Mend Solution
+            </a>
+          </p>
         </div>
       </div>
     </footer>

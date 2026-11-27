@@ -20,7 +20,7 @@ export const NAV: (Item | Group)[] = [
     label: "Championship",
     base: "/championship",
     items: [
-      { to: "/championship", label: "2026 Championship", desc: "Events, fee and registration" },
+      { to: "/championship", label: "2027 Championship", desc: "Events, fee and registration" },
       { to: "/championship/results", label: "Results", desc: "Champions since 2010" },
       { to: "/championship/rules", label: "Rules & regulations", desc: "Eligibility and general rules" },
       { to: "/championship/organizers", label: "Organisers", desc: "Host colleges by year" },

@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { EVENTS, sportImage } from "../content/sports";
-import { RESULTS_2020, titleLeaders } from "../content/results2020";
+import { collegeShort, LATEST, titleLeaders } from "../content/results";
 import { ALBUMS, ALBUM_COVER } from "../content/data";
 import { btn, ButtonLink, Decor, Icon, IconFire, IconNext, Reveal, SectionHead } from "../components/ui";
 import { DEMO_URL, REGISTER_URL } from "../lib/config";
@@ -16,7 +16,7 @@ const PODIUM = [
 ];
 
 export function HomePage() {
-  const leaders = titleLeaders(3);
+  const leaders = titleLeaders(LATEST, 3);
   return (
     <>
       {/* Hero — bg 1 artwork (athletes on the right, light space on the left for the copy) */}
@@ -48,7 +48,7 @@ export function HomePage() {
                 Register your college
               </a>
               <Link to="/championship" className={`${btn("secondary")} text-base`}>
-                2026 events &amp; fee
+                2027 events &amp; fee
                 <IconNext />
               </Link>
             </div>
@@ -141,7 +141,7 @@ export function HomePage() {
         <Decor name="arc" className="-right-24 -top-8 w-[340px]" />
         <div className="mx-auto max-w-6xl px-4">
           <SectionHead
-            eyebrow="XI CENTIES · 2020"
+            eyebrow={`${LATEST.edition}th CENTIES · ${LATEST.year}`}
             title="Latest champions"
             intro="Team title winners from the most recent published results."
             action={
@@ -178,7 +178,7 @@ export function HomePage() {
             {(["M", "W"] as const).map((g) => (
               <Reveal key={g} className="overflow-hidden rounded-xl border border-line bg-white">
                 <table className="w-full text-left text-[14.5px]">
-                  <caption className="sr-only">{g === "M" ? "Men" : "Women"}: 2020 winners</caption>
+                  <caption className="sr-only">{g === "M" ? "Men" : "Women"}: {LATEST.year} winners</caption>
                   <thead className="bg-surface text-[12.5px] font-semibold uppercase tracking-[0.06em] text-muted">
                     <tr>
                       <th scope="col" className="px-5 py-2.5">
@@ -190,10 +190,10 @@ export function HomePage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-line">
-                    {RESULTS_2020[g].slice(0, 5).map((p) => (
+                    {LATEST[g].slice(0, 5).map((p) => (
                       <tr key={p.event}>
                         <td className="px-5 py-2.5 font-medium text-ink">{p.event}</td>
-                        <td className="px-5 py-2.5 text-right text-muted">{p.winner.split(",")[0]}</td>
+                        <td className="px-5 py-2.5 text-right text-muted">{collegeShort(p.winner)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -241,7 +241,7 @@ export function HomePage() {
       <section className="mx-auto max-w-6xl px-4">
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { to: "/downloads/forms", t: "Forms & fixtures", d: "Eligibility form, knockout fixtures, score sheets.", icon: "download" as const },
+            { to: "/downloads/forms", t: "Forms & fixtures", d: "Rules, knockout fixtures, score sheets.", icon: "download" as const },
             { to: "/championship/rules", t: "Rules & regulations", d: "Eligibility, protests and the general rules for every college.", icon: "file" as const },
             { to: "/contact", t: "Contact the committee", d: "Call or email the CENTIES office.", icon: "phone" as const },
           ].map((q) => (

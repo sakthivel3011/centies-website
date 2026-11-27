@@ -7,6 +7,8 @@ import "@fontsource/barlow-condensed/800.css";
 import "./index.css";
 import { routes } from "./routes";
 
+console.info("%cCENTIES — website by Mend Solution · https://mendsolution.in/", "color:#1f2e8c;font-weight:600");
+
 // Scroll animations and smooth scrolling start once the page is ready (Layout in routes.tsx, src/lib/aos.ts and smooth.ts).
 
 // Load the code for the current page before hydrating, so the pre-rendered HTML is reused without a flash.

@@ -114,7 +114,7 @@ export function ContactPage() {
         <div className="mt-14 grid gap-4 md:grid-cols-2">
           <div className="rounded-xl border border-line p-6" data-aos="fade-up">
             <p className="font-semibold text-ink">Registering a college?</p>
-            <p className="mt-1 text-[14.5px] text-muted">Registration and payment for 2026 are online, and the confirmation is emailed instantly.</p>
+            <p className="mt-1 text-[14.5px] text-muted">Registration and payment for 2027 are online, and the confirmation is emailed instantly.</p>
             <a href={REGISTER_URL} className={`${btn("primary")} mt-4`}>
               <IconFire />
               Go to registration
@@ -122,7 +122,7 @@ export function ContactPage() {
           </div>
           <div className="rounded-xl border border-line p-6" data-aos="fade-up">
             <p className="font-semibold text-ink">Looking for forms or fixtures?</p>
-            <p className="mt-1 text-[14.5px] text-muted">Eligibility forms, knockout fixtures, score sheets and past results.</p>
+            <p className="mt-1 text-[14.5px] text-muted">Rules, knockout fixtures, score sheets and past results.</p>
             <Link to="/downloads" className={`${btn("primary")} mt-4`}>
               Open downloads
               <IconNext />

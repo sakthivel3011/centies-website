@@ -1,15 +1,28 @@
 import { useState } from "react";
-import { RESULTS_2020 } from "../content/results2020";
+import { college, collegeShort, RESULTS, ROLL_EVENTS, rollFor } from "../content/results";
 import { EDITIONS } from "../content/history";
 import { DOCS, fileSize } from "../content/data";
+import { GENDER_LABEL, type Gender } from "../content/sports";
 import { btn, Decor, Icon, IconNext, PageHero, Reveal, SectionHead } from "../components/ui";
+import { Switch } from "../components/Switch";
 
-const ORD = (n: number) => (n === 1 ? "1st" : n === 2 ? "2nd" : n === 3 ? "3rd" : `${n}th`);
-const short = (college: string) => college.split(",")[0];
+const ORD = (n: number) => (n % 10 === 1 && n !== 11 ? `${n}st` : n % 10 === 2 && n !== 12 ? `${n}nd` : n % 10 === 3 && n !== 13 ? `${n}rd` : `${n}th`);
+
+/** A college in a table: short name, full name on hover. */
+function College({ code, strong = false }: { code: string; strong?: boolean }) {
+  return (
+    <span title={college(code)} className={strong ? "font-medium text-ink" : "text-muted"}>
+      {collegeShort(code)}
+    </span>
+  );
+}
 
 export function ResultsPage() {
-  const [g, setG] = useState<"M" | "W">("M");
-  const [switched, setSwitched] = useState(false); // animate the list only after the first tab change, not on page load
+  const [year, setYear] = useState(RESULTS[0].year);
+  const [g, setG] = useState<Gender>("M");
+  const [anim, setAnim] = useState(""); // slide the list in from the side of the tab picked; nothing on first load
+  const r = RESULTS.find((x) => x.year === year)!;
+  const places = r[g].some((x) => x.third); // 2020 lists the first four places
   const results = DOCS.filter((d) => d.category === "results").sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
 
   return (
@@ -27,68 +40,72 @@ export function ResultsPage() {
       <section className="relative isolate overflow-clip">
         <Decor name="arc" className="-right-24 -top-6 w-[330px]" />
         <div className="mx-auto max-w-6xl px-4 py-20">
-          <SectionHead eyebrow="11th CENTIES Championship · 2020" title="2020 champions" />
-          {/* Men / Women switch: a dark pill slides under the chosen tab */}
-          <div role="tablist" aria-label="Category" data-aos="fade-up" className="relative mt-8 inline-grid grid-cols-2 gap-1 rounded-lg bg-surface p-1 ring-1 ring-inset ring-line">
-            <span
-              aria-hidden
-              className={`absolute bottom-1 left-1 top-1 w-[calc(50%-6px)] rounded-md bg-royal-900 shadow-[var(--shadow-xs)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${g === "W" ? "translate-x-[calc(100%+4px)]" : ""}`}
+          <SectionHead eyebrow={`${ORD(r.edition)} CENTIES Championship · ${r.year}`} title={`${r.year} champions`} />
+          <div className="mt-8 flex flex-wrap items-center gap-3" data-aos="fade-up">
+            <Switch
+              label="Year"
+              options={RESULTS.map((x) => ({ key: x.year, label: String(x.year) }))}
+              value={year}
+              onChange={(y) => {
+                setAnim(y < year ? "animate-slide-from-right" : "animate-slide-from-left");
+                setYear(y);
+              }}
             />
-            {(["M", "W"] as const).map((k) => (
-              <button
-                key={k}
-                role="tab"
-                type="button"
-                aria-selected={g === k}
-                onClick={() => {
-                  if (k !== g) setSwitched(true);
-                  setG(k);
-                }}
-                className={`relative h-8 rounded-md px-5 text-[13px] font-semibold transition-colors duration-300 ${g === k ? "text-white" : "text-muted hover:text-ink"}`}
-              >
-                {k === "M" ? "Men" : "Women"} · {RESULTS_2020[k].length}
-              </button>
-            ))}
+            <Switch
+              label="Category"
+              options={(["M", "W"] as Gender[]).map((k) => ({ key: k, label: `${GENDER_LABEL[k]} · ${r[k].length}` }))}
+              value={g}
+              onChange={(k) => {
+                setAnim(k === "W" ? "animate-slide-from-right" : "animate-slide-from-left");
+                setG(k);
+              }}
+            />
           </div>
 
-          <div role="tabpanel" className="mt-5 overflow-hidden rounded-xl border border-line bg-white" data-aos="fade-up">
-            <div className="hidden grid-cols-[150px_1fr_1fr_1fr_1fr] gap-4 border-b border-line bg-surface px-5 py-3 text-[12.5px] font-semibold uppercase tracking-[0.06em] text-muted md:grid">
+          <div role="tabpanel" aria-label={`${r.year} ${GENDER_LABEL[g]} results`} className="mt-5 overflow-hidden rounded-xl border border-line bg-white" data-aos="fade-up">
+            <div className={`hidden gap-4 border-b border-line bg-surface px-5 py-3 text-[12.5px] font-semibold uppercase tracking-[0.06em] text-muted md:grid ${places ? "grid-cols-[150px_1fr_1fr_1fr_1fr]" : "grid-cols-[180px_1fr_1fr]"}`}>
               <span>Event</span>
               <span>Winner</span>
               <span>Runner-up</span>
-              <span>Third</span>
-              <span>Fourth</span>
+              {places && <span>Third</span>}
+              {places && <span>Fourth</span>}
             </div>
-            <ul key={g} className={`divide-y divide-line ${switched ? (g === "W" ? "animate-slide-from-right" : "animate-slide-from-left") : ""}`}>
-              {RESULTS_2020[g].map((p) => (
-                <li key={p.event} className="grid gap-x-4 gap-y-1.5 px-5 py-4 text-[14.5px] md:grid-cols-[150px_1fr_1fr_1fr_1fr] md:items-center">
-                  <span className="font-semibold text-ink">{p.event}</span>
-                  <span className="flex items-center gap-2 font-medium text-ink">
+            <ul key={`${year}-${g}`} className={`divide-y divide-line ${anim}`}>
+              {r[g].map((x) => (
+                <li key={x.event} className={`grid gap-x-4 gap-y-1.5 px-5 py-4 text-[14.5px] md:items-center ${places ? "md:grid-cols-[150px_1fr_1fr_1fr_1fr]" : "md:grid-cols-[180px_1fr_1fr]"}`}>
+                  <span className="font-semibold text-ink">{x.event}</span>
+                  <span className="flex items-center gap-2">
                     <Icon name="trophy" className="size-4 shrink-0 text-gold-600" />
                     <span>
                       <span className="mr-1 text-xs font-semibold text-muted md:hidden">Winner:</span>
-                      {short(p.winner)}
+                      <College code={x.winner} strong />
                     </span>
                   </span>
-                  <span className="text-muted">
-                    <span className="mr-1 text-xs font-semibold md:hidden">Runner-up:</span>
-                    {short(p.runner)}
+                  <span>
+                    <span className="mr-1 text-xs font-semibold text-muted md:hidden">Runner-up:</span>
+                    <College code={x.runner} />
                   </span>
-                  <span className="text-muted">
-                    <span className="mr-1 text-xs font-semibold md:hidden">Third:</span>
-                    {short(p.third)}
-                  </span>
-                  <span className="text-muted">
-                    <span className="mr-1 text-xs font-semibold md:hidden">Fourth:</span>
-                    {short(p.fourth)}
-                  </span>
+                  {x.third && (
+                    <span>
+                      <span className="mr-1 text-xs font-semibold text-muted md:hidden">Third:</span>
+                      <College code={x.third} />
+                    </span>
+                  )}
+                  {x.fourth && (
+                    <span>
+                      <span className="mr-1 text-xs font-semibold text-muted md:hidden">Fourth:</span>
+                      <College code={x.fourth} />
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
-          <p className="mt-3 text-[13px] text-muted">Transcribed from the official 2020 results. Individual athletics results are in the full PDF below.</p>
+          <p className="mt-3 text-[13px] text-muted">From the official {r.year} results. The full PDF is in the archive below.</p>
         </div>
       </section>
+
+      <RollOfChampions />
 
       <section className="relative isolate overflow-clip border-t border-line py-20">
         <Decor name="swells" from="xl" className="-right-32 top-10 w-[300px]" />
@@ -106,7 +123,7 @@ export function ResultsPage() {
                     </div>
                     {ed?.colleges && <span className="pt-1 text-[13px] text-muted">{ed.colleges} colleges</span>}
                   </div>
-                  {ed && <p className="mt-3 line-clamp-2 text-[13px] text-muted">Hosted by {ed.hosts.join(", ")}</p>}
+                  {ed && ed.hosts.length > 0 && <p className="mt-3 line-clamp-2 text-[13px] text-muted">Hosted by {ed.hosts.join(", ")}</p>}
                   <div className="mt-auto flex items-center justify-between gap-2 pt-5">
                     <a href={d.file} target="_blank" rel="noopener" className={btn("primary", "sm")}>
                       View results
@@ -128,5 +145,71 @@ export function ResultsPage() {
         </div>
       </section>
     </>
+  );
+}
+
+/** Roll of champions: pick men or women and an event, and see its winner and runner-up for every year since 2010. */
+function RollOfChampions() {
+  const [g, setG] = useState<Gender>("M");
+  const [event, setEvent] = useState(ROLL_EVENTS.M[0]);
+  const ev = ROLL_EVENTS[g].includes(event) ? event : ROLL_EVENTS[g][0];
+  const rows = rollFor(g, ev);
+  return (
+    <section className="relative isolate overflow-clip border-t border-line py-20">
+      <div className="mx-auto max-w-6xl px-4">
+        <SectionHead eyebrow={`2010 – ${RESULTS[0].year}`} title="Roll of champions" intro="The winner and runner-up of every event, every year since the first championship." />
+        <div className="mt-8" data-aos="fade-up">
+          <Switch label="Category" options={(["M", "W"] as Gender[]).map((k) => ({ key: k, label: GENDER_LABEL[k] }))} value={g} onChange={setG} />
+          <div role="group" aria-label="Event" className="mt-4 flex flex-wrap gap-2">
+            {ROLL_EVENTS[g].map((e) => (
+              <button
+                key={e}
+                type="button"
+                aria-pressed={e === ev}
+                onClick={() => setEvent(e)}
+                className={`rounded-full border px-3.5 py-1.5 text-[13px] font-semibold transition-colors duration-200 ${e === ev ? "border-royal-900 bg-royal-900 text-white" : "border-line bg-white text-ink/75 hover:border-slate-400 hover:text-ink"}`}
+              >
+                {e}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 overflow-hidden rounded-xl border border-line bg-white" data-aos="fade-up">
+          <table key={`${g}-${ev}`} className="w-full animate-rise text-left text-[14px] sm:text-[14.5px]">
+            <caption className="sr-only">
+              {GENDER_LABEL[g]} {ev}: winner and runner-up by year
+            </caption>
+            <thead className="border-b border-line bg-surface text-[12px] font-semibold uppercase tracking-[0.06em] text-muted sm:text-[12.5px]">
+              <tr>
+                <th scope="col" className="w-24 px-4 py-3 sm:w-40 sm:px-5">Year</th>
+                <th scope="col" className="px-4 py-3 sm:px-5">Winner</th>
+                <th scope="col" className="px-4 py-3 sm:px-5">Runner-up</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {rows.map((x) => (
+                <tr key={x.year} className="align-top">
+                  <th scope="row" className="px-4 py-3 font-normal sm:px-5">
+                    <span className="block font-semibold text-ink tabular-nums">{x.year}</span>
+                    <span className="block text-[12.5px] text-muted">
+                      {ORD(x.edition)} edition{x.combined ? " · M & W" : ""}
+                    </span>
+                  </th>
+                  <td className="px-4 py-3 sm:px-5">
+                    <College code={x.winner} strong />
+                  </td>
+                  <td className="px-4 py-3 sm:px-5">{x.runner ? <College code={x.runner} /> : <span className="text-muted">—</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 max-w-3xl text-[13px] leading-relaxed text-muted">
+          2010 – 2019 from the CENTIES Championship booklet; 2020 onwards from the official results. From 2014 to 2018 Chess was one event for men and women together (marked M &amp; W). There
+          were no championships in 2021 and 2022. Some older colleges are shown by their short code, as in the booklet.
+        </p>
+      </div>
+    </section>
   );
 }

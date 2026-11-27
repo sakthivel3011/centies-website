@@ -1,0 +1,30 @@
+# CENTIES — Inter Engineering Sports Championship
+
+> Official website of the CENTIES Association (Coimbatore, Erode, Nilgiris and Tiruppur District Inter Engineering Sports Association, TN Reg. No. SRG/CBE/40/2023). CENTIES has held an inter-engineering-college sports championship every year since 2010 (no editions in 2021 and 2022). The 16th CENTIES Championship 2027 has 14 events for men and 10 for women; colleges register online at https://register.centies.in.
+
+- Main website: https://www.centies.in/
+- College registration: https://register.centies.in/
+- Website designed and developed by Mend Solution: https://mendsolution.in/
+
+## Key facts
+
+- Started on 22 November 2009 by physical education directors of engineering colleges; first championship in 2010 (Volleyball and Table Tennis).
+- Registered as the CENTIES Association under the Societies Act at Coimbatore in 2023.
+- 15th CENTIES Championship 2026: 384 teams from 26 colleges; Men's Cricket added.
+- Events for men: Athletics, Badminton, Ball Badminton, Basketball, Chess, Cricket, Football, Handball, Hockey, Kabaddi, Kho-Kho, Table Tennis, Tennis, Volleyball.
+- Events for women: Athletics, Badminton, Ball Badminton, Basketball, Chess, Kabaddi, Kho-Kho, Table Tennis, Throwball, Volleyball.
+
+## Pages
+
+- [16th CENTIES Championship 2027](https://www.centies.in/championship): events, the most players per event, registration fee and how to register
+- [Rules & regulations](https://www.centies.in/championship/rules): eligibility, protests and the 14 general rules
+- [Results](https://www.centies.in/championship/results): champions of 2025, 2024, 2023 and 2020, the roll of champions since 2010, and every official results PDF
+- [Organisers](https://www.centies.in/championship/organizers): host colleges of every edition
+- [Sponsors](https://www.centies.in/championship/sponsors): winner and runner-up trophy sponsors of every event
+- [Awards](https://www.centies.in/championship/grants): trophies, certificates and the Fair Play Award
+- [About CENTIES](https://www.centies.in/about): history and milestones
+- [Office bearers](https://www.centies.in/about/office-bearers): the executive committee
+- [Gallery](https://www.centies.in/gallery): photos from past championships
+- [Downloads](https://www.centies.in/downloads): rules, knockout fixtures, score sheets, results and sponsor lists
+- [Contact](https://www.centies.in/contact): CENTIES office phone, email and address
+- [Support](https://www.centies.in/support): help with the website, registration or the championship

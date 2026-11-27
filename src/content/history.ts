@@ -1,7 +1,8 @@
-/** Edition history taken from the official organisers and results PDFs (2010 – 2020). */
+/** Edition history taken from the official organisers and results PDFs (2010 – 2025) and the 15th CENTIES Championship 2026 booklet. */
 export type Edition = {
   year: number;
   edition: number;
+  /** Host colleges (empty when the list was not published). */
   hosts: string[];
   colleges?: number;
   note?: string;
@@ -61,6 +62,25 @@ export const EDITIONS: Edition[] = [
     note: "Kabaddi added for men.",
   },
   { year: 2020, edition: 11, hosts: ["Bannari Amman Institute of Technology", "Kongu Engineering College", "PSG College of Technology", "SNS College of Technology"], colleges: 24 },
+  { year: 2023, edition: 12, hosts: [], note: "The first championship after 2020." },
+  { year: 2024, edition: 13, hosts: [] },
+  { year: 2025, edition: 14, hosts: [] },
+  {
+    year: 2026,
+    edition: 15,
+    hosts: [
+      "Bannari Amman Institute of Technology",
+      "Erode Sengunthar Engineering College",
+      "Kongu Engineering College",
+      "KPR Institute of Engineering & Technology",
+      "Kumaraguru College of Technology",
+      "Nandha Engineering College",
+      "Sri Ramakrishna Institute of Technology",
+      "Velalar College of Engineering & Technology",
+    ],
+    colleges: 26,
+    note: "Men’s Cricket added. 384 teams from 26 colleges — 14 events for men and 10 for women.",
+  },
 ];
 
 export const MILESTONES = [
@@ -68,6 +88,7 @@ export const MILESTONES = [
   { year: "2010", title: "1st CENTIES Championship", text: "Two games — Table Tennis and Volleyball for men and women — with 23 colleges taking part." },
   { year: "2015", title: "Athletics arrives", text: "Athletics and women’s Throwball join a programme that now spans more than ten sports." },
   { year: "2018", title: "Renamed CENTIES", text: "On 3 May 2018 the general body renames the Engineering Colleges Physical Educationist Club (ECPEC) to CENTIES." },
-  { year: "2023", title: "Registered association", text: "CENTIES Association is registered in Tamil Nadu — " + "SRG/CBE/40/2023." },
-  { year: "2026", title: "16th Championship", text: "14 events for men and 10 for women, with online registration for the first time." },
+  { year: "2023", title: "Registered association", text: "CENTIES Association is registered under the Societies Act at Coimbatore — SRG/CBE/40/2023. The 12th Championship is held the same year." },
+  { year: "2026", title: "15th Championship", text: "Men’s Cricket joins the programme: 14 events for men and 10 for women, with 384 teams from 26 colleges." },
+  { year: "2027", title: "16th Championship", text: "Online registration for the first time." },
 ];

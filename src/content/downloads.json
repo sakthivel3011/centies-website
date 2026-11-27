@@ -88,6 +88,30 @@
   "year": 2020
  },
  {
+  "category": "results",
+  "title": "12th CENTIES Championship 2023 \u2014 results",
+  "file": "/docs/results/centies-results-2023.pdf",
+  "bytes": 324243,
+  "type": "PDF",
+  "year": 2023
+ },
+ {
+  "category": "results",
+  "title": "13th CENTIES Championship 2024 \u2014 results",
+  "file": "/docs/results/centies-results-2024.pdf",
+  "bytes": 324513,
+  "type": "PDF",
+  "year": 2024
+ },
+ {
+  "category": "results",
+  "title": "14th CENTIES Championship 2025 \u2014 results",
+  "file": "/docs/results/centies-results-2025.pdf",
+  "bytes": 324526,
+  "type": "PDF",
+  "year": 2025
+ },
+ {
   "category": "organizers",
   "title": "Organising colleges 2010 \u2013 2016",
   "file": "/docs/organizers/centies-organisers-2010-2016.pdf",
@@ -150,14 +174,6 @@
   "bytes": 250236,
   "type": "PDF",
   "note": "General rules, system of play and squad sizes for every event"
- },
- {
-  "category": "forms",
-  "title": "Player eligibility form",
-  "file": "/docs/forms/eligibility-form.pdf",
-  "bytes": 295308,
-  "type": "PDF",
-  "note": "Players list to be signed by the Principal and the Physical Director"
  },
  {
   "category": "forms",

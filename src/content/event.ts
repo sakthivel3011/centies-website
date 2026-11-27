@@ -5,8 +5,8 @@
  */
 export const EVENT = {
   edition: 16,
-  year: 2026,
-  name: "16th CENTIES Championship 2026",
+  year: 2027,
+  name: "16th CENTIES Championship 2027",
   registrationDeadline: null as string | null,
   startDate: null as string | null,
   endDate: null as string | null,

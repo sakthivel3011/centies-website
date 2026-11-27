@@ -98,14 +98,14 @@ export const routes: RouteObject[] = [
   {
     element: <Layout />,
     children: [
-      { path: "/", lazy: page(home, "HomePage"), handle: { meta: { title: "Home", description: "CENTIES — the Coimbatore, Erode, Nilgiris and Tiruppur District Inter Engineering Sports Championship. 16th edition in 2026 with 24 events." } } },
+      { path: "/", lazy: page(home, "HomePage"), handle: { meta: { title: "Home", description: "CENTIES — the Coimbatore, Erode, Nilgiris and Tiruppur District Inter Engineering Sports Championship. 16th edition in 2027 with 24 events." } } },
       { path: "/about", lazy: page(about, "AboutPage"), handle: { meta: { title: "About CENTIES", description: "How CENTIES began in 2009, how the championship has grown since 2010, and what it stands for." } } },
       { path: "/about/office-bearers", lazy: page(about, "OfficeBearersPage"), handle: { meta: { title: "Office bearers", description: "The executive committee leading the CENTIES Association." } } },
-      { path: "/championship", lazy: page(() => import("./pages/ChampionshipPage"), "ChampionshipPage"), handle: { meta: { title: "16th CENTIES Championship 2026", description: "Events, registration fee and how to register your college for the 16th CENTIES Championship 2026." } } },
+      { path: "/championship", lazy: page(() => import("./pages/ChampionshipPage"), "ChampionshipPage"), handle: { meta: { title: "16th CENTIES Championship 2027", description: "Events, registration fee and how to register your college for the 16th CENTIES Championship 2027." } } },
       { path: "/championship/results", lazy: page(() => import("./pages/ResultsPage"), "ResultsPage"), handle: { meta: { title: "Results", description: "CENTIES champions and official results from every edition since 2010." } } },
       { path: "/championship/organizers", lazy: page(archive, "OrganizersPage"), handle: { meta: { title: "Organisers", description: "Engineering colleges that have hosted CENTIES events since 2010." } } },
       { path: "/championship/sponsors", lazy: page(archive, "SponsorsPage"), handle: { meta: { title: "Sponsors", description: "Trophy sponsors who support the CENTIES Championship." } } },
-      { path: "/championship/rules", lazy: page(() => import("./pages/RulesPage"), "RulesPage"), handle: { meta: { title: "Rules & regulations", description: "Eligibility, protests, the general rules and the system of play and squad size for every CENTIES event." } } },
+      { path: "/championship/rules", lazy: page(() => import("./pages/RulesPage"), "RulesPage"), handle: { meta: { title: "Rules & regulations", description: "Eligibility, protests and the general rules for every CENTIES event." } } },
       { path: "/championship/grants", lazy: page(archive, "GrantsPage"), handle: { meta: { title: "Awards & grants", description: "Trophies, certificates and the Fair Play Award at the CENTIES Championship." } } },
       { path: "/gallery", lazy: page(gallery, "GalleryPage"), handle: { meta: { title: "Gallery", description: "Photos from CENTIES championships — matches, ceremonies and champions." } } },
       { path: "/gallery/:album", lazy: page(gallery, "AlbumPage"), handle: { meta: albumMeta } },

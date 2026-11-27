@@ -1,13 +1,19 @@
+import { useState } from "react";
 import { EDITIONS } from "../content/history";
+import { OPEN_TROPHIES, TROPHY_SPONSORS } from "../content/sponsors";
+import { GENDER_LABEL, type Gender } from "../content/sports";
+import { Switch } from "../components/Switch";
 import { DOCS, fileSize } from "../content/data";
-import { ButtonLink, Decor, DocRow, Icon, PageHero, Reveal, SectionHead, btn } from "../components/ui";
+import { ButtonLink, Decor, DocRow, PageHero, Reveal, SectionHead } from "../components/ui";
 
 const ORD = (n: number) => (n === 1 ? "1st" : n === 2 ? "2nd" : n === 3 ? "3rd" : `${n}th`);
 
 export function OrganizersPage() {
   const docs = DOCS.filter((d) => d.category === "organizers").sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
-  const editions = [...EDITIONS].reverse();
-  const hostCount = new Set(EDITIONS.flatMap((e) => e.hosts)).size;
+  // Editions whose host list was published (2023 – 2025 were not), newest first
+  const hosted = EDITIONS.filter((e) => e.hosts.length > 0);
+  const editions = [...hosted].reverse();
+  const hostCount = new Set(hosted.flatMap((e) => e.hosts)).size;
   return (
     <>
       <PageHero
@@ -26,7 +32,7 @@ export function OrganizersPage() {
           <SectionHead
             eyebrow={`${EDITIONS[0].year} – ${EDITIONS.at(-1)!.year}`}
             title="Host colleges by year"
-            intro={`${EDITIONS.length} editions, hosted by ${hostCount} different engineering colleges. Since 2013, each edition has been shared between several host colleges.`}
+            intro={`${EDITIONS.length} editions so far, hosted by ${hostCount} different engineering colleges. Since 2013, each edition has been shared between several host colleges.`}
           />
           <div className="mt-10 overflow-hidden rounded-xl border border-slate-400 bg-white" data-aos="fade-up">
             <table className="w-full text-left text-[14.5px]">
@@ -66,26 +72,18 @@ export function OrganizersPage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-[13px] text-muted">“Colleges” is the number of engineering colleges that took part that year.</p>
+          <p className="mt-3 text-[13px] text-muted">“Colleges” is the number of engineering colleges that took part that year. Host lists for 2023 – 2025 are not published yet.</p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4">
+
+      <section className="mx-auto max-w-6xl border-t border-line px-4 pt-20">
         <SectionHead eyebrow="Documents" title="Organiser records" intro="Official lists with events and dates for each host college." />
         <ul className="mt-8 grid gap-3 md:grid-cols-2">
           {docs.map((d) => (
             <DocRow key={d.file} title={d.title} file={d.file} size={fileSize(d.bytes)} type={d.type} />
           ))}
         </ul>
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-line p-6">
-          <div>
-            <p className="font-semibold text-ink">Would your college like to host a CENTIES event?</p>
-            <p className="mt-1 text-[14.5px] text-muted">The organiser booklet explains what is involved.</p>
-          </div>
-          <a href="/docs/forms/organiser-booklet.pdf" download className={btn("secondary")}>
-            <Icon name="download" className="size-4" /> Organiser booklet
-          </a>
-        </div>
       </section>
     </>
   );
@@ -93,15 +91,10 @@ export function OrganizersPage() {
 
 export function SponsorsPage() {
   const docs = DOCS.filter((d) => d.category === "sponsors");
-  const supporters = [
-    { name: "Coimbatore Institute of Technology", what: "Athletics trophies (men)" },
-    { name: "National Sports, Coimbatore", what: "Badminton winner’s trophy (men)" },
-    { name: "Seagull Sports, Erode", what: "Basketball trophies (men)" },
-    { name: "Dr. R. Sambath, DPE, CIT", what: "Football trophies (men)" },
-    { name: "Kumaraguru College of Technology", what: "Handball trophies (men)" },
-    { name: "Tiruppur Kabaddi Association", what: "Kabaddi trophies (men)" },
-    { name: "PSG Tech Kho-Kho Alumni Players", what: "Kho-Kho trophies (men)" },
-  ];
+  const [g, setG] = useState<Gender>("M");
+  const [switched, setSwitched] = useState(false); // slide the table in only after the first tab change
+  const rows = TROPHY_SPONSORS[g];
+  const open = <span className="text-[13.5px] font-medium text-flame-600">Open for sponsorship</span>;
   return (
     <>
       <PageHero
@@ -116,15 +109,58 @@ export function SponsorsPage() {
       <section className="relative isolate overflow-clip">
         <Decor name="arc" className="-right-24 -top-6 w-[330px]" />
         <div className="mx-auto max-w-6xl px-4 py-20">
-          <SectionHead eyebrow="Since 2020" title="Trophy sponsors" intro="A selection of current men’s event trophy sponsors. The full men’s and women’s lists are in the documents below." />
-          <ul className="mt-10 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-            {supporters.map((s) => (
-              <Reveal as="li" key={s.name} className="border-t border-slate-400 py-5">
-                <p className="font-semibold text-ink">{s.name}</p>
-                <p className="mt-0.5 text-[14px] text-muted">{s.what}</p>
-              </Reveal>
-            ))}
-          </ul>
+          <SectionHead eyebrow="Winner & runner-up trophies" title="Trophy sponsors" intro="Who sponsors the winner’s and runner-up trophies of every men’s and women’s event." />
+          <Switch
+            label="Category"
+            className="mt-8"
+            options={(["M", "W"] as Gender[]).map((k) => ({ key: k, label: `${GENDER_LABEL[k]} · ${TROPHY_SPONSORS[k].length}` }))}
+            value={g}
+            onChange={(k) => {
+              if (k !== g) setSwitched(true);
+              setG(k);
+            }}
+          />
+          <div role="tabpanel" aria-label={`${GENDER_LABEL[g]} trophy sponsors`} className="mt-5 overflow-hidden rounded-xl border border-slate-400 bg-white" data-aos="fade-up">
+            <table key={g} className={`w-full text-left text-[14px] sm:text-[14.5px] ${switched ? (g === "W" ? "animate-slide-from-right" : "animate-slide-from-left") : ""}`}>
+              <caption className="sr-only">{GENDER_LABEL[g]}: trophy sponsors by event</caption>
+              <thead className="bg-royal-900 text-[12.5px] font-semibold uppercase tracking-[0.06em] text-white">
+                <tr>
+                  <th scope="col" className="w-12 whitespace-nowrap px-3 py-3 text-center sm:w-20 sm:px-5">S. No.</th>
+                  <th scope="col" className="px-3 py-3 sm:px-5">Event</th>
+                  <th scope="col" className="px-3 py-3 sm:px-5">Sponsor</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-400">
+                {rows.map((t, i) => (
+                  <tr key={t.event} className="align-top">
+                    <td className="px-3 py-3.5 text-center text-muted tabular-nums sm:px-5">{i + 1}</td>
+                    <th scope="row" className="px-3 py-3.5 font-medium text-ink sm:px-5">
+                      {t.event}
+                    </th>
+                    <td className="px-3 py-3.5 sm:px-5">
+                      {t.winner === t.runner ? (
+                        <>
+                          {t.winner ? <span className="text-ink/85">{t.winner}</span> : open}
+                          <span className="mt-0.5 block text-[12.5px] text-muted">Winner &amp; runner-up trophies</span>
+                        </>
+                      ) : (
+                        <dl className="space-y-1.5">
+                          <div>
+                            <dt className="text-[12.5px] text-muted">Winner</dt>
+                            <dd>{t.winner ? <span className="text-ink/85">{t.winner}</span> : open}</dd>
+                          </div>
+                          <div>
+                            <dt className="text-[12.5px] text-muted">Runner-up</dt>
+                            <dd>{t.runner ? <span className="text-ink/85">{t.runner}</span> : open}</dd>
+                          </div>
+                        </dl>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <ul className="mt-10 grid gap-3 md:grid-cols-2">
             {docs.map((d) => (
               <DocRow key={d.file} title={d.title} file={d.file} size={fileSize(d.bytes)} type={d.type} />
@@ -133,7 +169,7 @@ export function SponsorsPage() {
           <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-line p-6">
             <div>
               <p className="font-semibold text-ink">Sponsor a trophy</p>
-              <p className="mt-1 max-w-xl text-[14.5px] text-muted">Several winner and runner-up trophies are open for sponsorship. Support student athletes across four districts.</p>
+              <p className="mt-1 max-w-xl text-[14.5px] text-muted">{OPEN_TROPHIES} winner and runner-up trophies are open for sponsorship. Support student athletes across four districts.</p>
             </div>
             <ButtonLink to="/contact">Talk to us</ButtonLink>
           </div>
@@ -173,7 +209,7 @@ export function GrantsPage() {
             ))}
           </ul>
           <div className="mt-12 rounded-xl border border-line p-6">
-            <p className="font-semibold text-ink">Grants and prize details for 2026</p>
+            <p className="font-semibold text-ink">Grants and prize details for 2027</p>
             <p className="mt-1 text-[14.5px] text-muted">
               Financial grants and any prize money for the 16th CENTIES Championship will be announced by the Executive Committee. Registered colleges will be informed by email.
             </p>

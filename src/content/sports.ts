@@ -44,7 +44,13 @@ export function formatAll(sport: Sport, genders: Gender[]) {
   return genders.map((g) => `${GENDER_LABEL[g]}: ${formatFor(sport, g)}`).join(" · ");
 }
 
-/** Events for the 16th CENTIES Championship 2026 (14 men + 10 women), in the order of the paper form. */
+/** Most players a college may enter, the same label as the registration site ("Max 5 players"; Athletics "Max 3 + 2 reserves"). */
+export function maxPlayersLabel(sport: Sport) {
+  if (sport.max) return `Max ${sport.max} players`;
+  return sport.needsCount ? "Max 3 + 2 reserves" : sport.squad;
+}
+
+/** Events for the 16th CENTIES Championship 2027 (14 men + 10 women), in the order of the paper form. */
 export const EVENTS: Record<Gender, Sport[]> = {
   M: ["athletics", "badminton", "ball-badminton", "basketball", "chess", "cricket", "football", "handball", "hockey", "kabaddi", "kho-kho", "table-tennis", "tennis", "volleyball"].map((c) => ALL[c]),
   W: ["athletics", "badminton", "ball-badminton", "basketball", "chess", "kabaddi", "kho-kho", "table-tennis", "throwball", "volleyball"].map((c) => ALL[c]),

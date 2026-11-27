@@ -1,10 +1,7 @@
-import { DOCS, fileSize } from "../content/data";
-import { GENERAL_RULES as RULES, HOST_GUIDELINE, RULES_CONTACT, RULES_DOC } from "../content/rules";
-import { EVENTS, formatFor, GENDER_LABEL, type Gender } from "../content/sports";
+import { GENERAL_RULES as RULES, RULES_CONTACT, RULES_DOC } from "../content/rules";
 import { btn, Decor, Icon, PageHero, Reveal, SectionHead } from "../components/ui";
 
 export function RulesPage() {
-  const eligibility = DOCS.find((d) => d.file.endsWith("eligibility-form.pdf"));
   return (
     <>
       <PageHero
@@ -46,62 +43,8 @@ export function RulesPage() {
                   </a>
                 </div>
               </div>
-              {eligibility && (
-                <div className="rounded-xl border border-line bg-white p-5">
-                  <p className="font-semibold text-ink">Eligibility form</p>
-                  <p className="mt-1 text-[14px] text-muted">
-                    Players list for every team · {eligibility.type}, {fileSize(eligibility.bytes)}
-                  </p>
-                  <a href={eligibility.file} download className={`${btn("primary", "sm")} mt-4`}>
-                    <Icon name="download" className="size-4" /> Download
-                  </a>
-                </div>
-              )}
             </aside>
           </div>
-        </div>
-      </section>
-
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-6xl px-4 py-20">
-          <SectionHead eyebrow="Men & women" title="System of play" intro="Format and the most players a college may enter for every event." />
-          <div className="mt-10 grid gap-10 lg:grid-cols-2">
-            {(["M", "W"] as Gender[]).map((g) => (
-              <Reveal key={g}>
-                <h3 className="text-[15px] font-semibold text-ink">
-                  {GENDER_LABEL[g]} <span className="font-normal text-muted">· {EVENTS[g].length} events</span>
-                </h3>
-                <div className="mt-3 overflow-x-auto rounded-xl border border-line bg-white">
-                  <table className="w-full min-w-[440px] text-left text-[14px]">
-                    <caption className="sr-only">System of play — {GENDER_LABEL[g]}</caption>
-                    <thead className="border-b border-line text-[12.5px] text-muted">
-                      <tr>
-                        <th scope="col" className="px-4 py-2.5 font-semibold">Event</th>
-                        <th scope="col" className="px-4 py-2.5 font-semibold">Format / duration</th>
-                        <th scope="col" className="px-4 py-2.5 font-semibold">Players</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-line">
-                      {EVENTS[g].map((s) => (
-                        <tr key={s.code}>
-                          <th scope="row" className="px-4 py-2.5 font-medium text-ink">{s.name}</th>
-                          <td className="px-4 py-2.5 text-ink/80">{formatFor(s, g)}</td>
-                          <td className="px-4 py-2.5 text-ink/80">{s.squad}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <p className="mt-6 text-[14.5px] leading-relaxed text-muted">
-            Athletics: an athlete can take part in 2 events and 2 relays. A college can make 3 entries and 2 reserves per event.
-          </p>
-          <Reveal className="mt-8 rounded-xl border border-line border-l-2 border-l-royal-600 bg-white p-5">
-            <p className="font-semibold text-ink">Guideline for host institutions</p>
-            <p className="mt-1.5 text-[14.5px] leading-relaxed text-muted">{HOST_GUIDELINE}</p>
-          </Reveal>
         </div>
       </section>
     </>

@@ -14,7 +14,7 @@ export const DOCS = downloadsJson as Doc[];
 export const ALBUM_COVER: Record<string, number> = { "centies-2018": 5, "centies-2019": 4, "centies-2020-men": 1, "centies-2020-women": 13 };
 
 export const DOC_CATEGORIES: { key: DocCategory; label: string; blurb: string }[] = [
-  { key: "forms", label: "Forms", blurb: "Eligibility form, organiser booklet and report form." },
+  { key: "forms", label: "Forms", blurb: "Rules, organiser booklet and report form." },
   { key: "knockout", label: "Knockout fixtures", blurb: "Blank knockout brackets for 4 to 64 teams." },
   { key: "score-sheets", label: "Score sheets", blurb: "Official match recording sheets for officials and scorers." },
   { key: "results", label: "Results", blurb: "Official results of every championship since 2010." },

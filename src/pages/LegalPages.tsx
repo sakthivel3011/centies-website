@@ -376,7 +376,7 @@ export function SupportPage() {
           body: (
             <ul>
               <li>
-                <b>How do I register my college?</b> Use the <a href={REGISTER_URL}>registration site</a>. The steps and fees are on the <Link to="/championship">2026 Championship</Link> page.
+                <b>How do I register my college?</b> Use the <a href={REGISTER_URL}>registration site</a>. The steps and fees are on the <Link to="/championship">2027 Championship</Link> page.
               </li>
               <li>
                 <b>Where are the forms and fixtures?</b> On the <Link to="/downloads">Downloads</Link> page. Enter the number of teams to get the right fixture.

@@ -28,7 +28,13 @@ export function AboutPage() {
               </p>
               <p>
                 The forum was named the Engineering Colleges Physical Educationist Club (ECPEC), with CENTIES as its major programme. On <b className="font-semibold text-ink">3 May 2018</b> the
-                general body officially renamed the club CENTIES. The association is registered in Tamil Nadu ({ORG.regNo}).
+                general body officially renamed the club CENTIES. In 2023 it was registered as the <b className="font-semibold text-ink">CENTIES Association</b> under the Societies Act at
+                Coimbatore ({ORG.regNo}).
+              </p>
+              <p>
+                The championship began in 2010 with just two games — Volleyball and Table Tennis for men and women. It now has 14 events for men and 10 for women, with Men’s Cricket added in the
+                15th CENTIES Championship 2026, which drew <b className="font-semibold text-ink">384 teams from 26 colleges</b>. CENTIES holds its General Body Meeting twice a year to review
+                progress and plan what comes next.
               </p>
             </div>
           </Reveal>
@@ -45,7 +51,7 @@ export function AboutPage() {
                 <dd className="mt-1 text-3xl font-semibold tracking-tight text-ink">2 games</dd>
               </div>
               <div className="py-5 pl-5">
-                <dt className="text-[13px] text-muted">2026 championship</dt>
+                <dt className="text-[13px] text-muted">2027 championship</dt>
                 <dd className="mt-1 text-3xl font-semibold tracking-tight text-ink">24 events</dd>
               </div>
             </dl>
@@ -89,7 +95,7 @@ export function AboutPage() {
       <section className="relative isolate overflow-clip">
         <Decor name="flow" from="xl" className="-right-40 top-0 w-[360px]" />
         <div className="mx-auto max-w-6xl px-4">
-          <SectionHead eyebrow="Milestones" title="The growth" intro={`From two games and 23 colleges in 2010 to ${EDITIONS.at(-1)!.edition} editions by 2020, with up to 36 colleges taking part.`} />
+          <SectionHead eyebrow="Milestones" title="The growth" intro={`From two games and 23 colleges in 2010 to ${EDITIONS.at(-1)!.edition} editions by ${EDITIONS.at(-1)!.year}, with up to 36 colleges taking part.`} />
           <ol className="mt-10 border-t-2 border-ink">
             {MILESTONES.map((m) => (
               <Reveal as="li" key={m.year} className="grid gap-x-10 gap-y-1 border-b border-ink py-6 sm:grid-cols-[120px_1fr]">

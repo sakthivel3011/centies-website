@@ -126,7 +126,7 @@ export function DownloadsPage() {
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search, e.g. “2019 results”, “football”, “eligibility”"
+              placeholder="Search, e.g. “2019 results”, “football”, “rules”"
               className="h-11 flex-1 bg-transparent text-[15px] outline-none placeholder:text-slate-500"
             />
           </div>
@@ -169,7 +169,7 @@ export function DownloadsPage() {
             <Link to="/contact" className="font-medium text-royal-600 underline underline-offset-2">
               Contact the committee
             </Link>
-            . Registration for 2026 is done online.
+            . Registration for 2027 is done online.
           </div>
         </div>
       </section>
